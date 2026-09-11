@@ -37,6 +37,8 @@ services:
       # - ./server-providers.yml:/app/server-providers.yml:ro
       - openmaic-data:/app/data
     restart: unless-stopped
+    labels:
+      - 'traefik.http.middlewares.openmaic-main-u4hc9yszhuppka4xnd14ljzx.basicauth.users=${basicauth_string}'
 
   # Optional PostgreSQL backing for the app-embedded persistence API.
   # The app reads DATABASE_URL and PERSISTENCE_DEV_TOKEN from .env.local; keeping
@@ -143,3 +145,4 @@ networks:
 volumes:
   openmaic-data:
   openmaic-postgres:
+
