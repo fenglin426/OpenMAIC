@@ -36,9 +36,7 @@ services:
       # Optional: mount server-providers.yml for provider config
       # - ./server-providers.yml:/app/server-providers.yml:ro
       - openmaic-data:/app/data
-    restart: unless-stopped
-    labels:
-      - 'traefik.http.middlewares.openmaic-main-u4hc9yszhuppka4xnd14ljzx.basicauth.users=fenglin426:$2y$05$vbR75SBmz.0uhuQ6f3a.fO11zkbgod35f/MxZWNAwnEPfZyEjUaZq'
+    restart: unless-stopped    
 
   # Optional PostgreSQL backing for the app-embedded persistence API.
   # The app reads DATABASE_URL and PERSISTENCE_DEV_TOKEN from .env.local; keeping
