@@ -21,7 +21,6 @@ services:
         - NEXT_PUBLIC_ENABLE_PPTX_IMPORT=${NEXT_PUBLIC_ENABLE_PPTX_IMPORT:-}
     ports:['3000']
     labels:
-        - traefik.docker.network=crnlwjndhfdarpr9rb1ahp3k
         - 'traefik.http.middlewares.openmaic-main-u4hc9yszhuppka4xnd14ljzx.basicauth.users=${BASIAUTH_STRING}'
     environment:
       # Point the app at the render service when it's running. This wins over any
