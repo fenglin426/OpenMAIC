@@ -19,7 +19,10 @@ services:
         - NEXT_PUBLIC_ENABLE_VIDEO_EXPORT=${NEXT_PUBLIC_ENABLE_VIDEO_EXPORT:-}
         - NEXT_PUBLIC_VIDEO_EXPORT_CTA_DESTINATION=${NEXT_PUBLIC_VIDEO_EXPORT_CTA_DESTINATION:-}
         - NEXT_PUBLIC_ENABLE_PPTX_IMPORT=${NEXT_PUBLIC_ENABLE_PPTX_IMPORT:-}
-    ports:['3000']
+    ports:
+        - '3000'
+    labels:
+        - 'traefik.http.middlewares.openmaic-main-u4hc9yszhuppka4xnd14ljzx.basicauth.users=${BASICAUTH_STRING}'
     
     environment:
       # Point the app at the render service when it's running. This wins over any
