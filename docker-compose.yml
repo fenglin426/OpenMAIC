@@ -28,8 +28,11 @@ services:
       # "video-export" profile. The app's capability check probes the service's
       # /health, so if the profile is off (service absent) the app reports the
       # MP4 export disabled and degrades to the ZIP-download path — this URL
-      # being set does not, by itself, advertise a working render.
+      # being set does not, by itself, advertise a working render.      
       - RENDER_SERVICE_URL=http://render-service:9000
+      - DATABASE_URL=postgresql://openmaic:${PERSISTENCE_POSTGRES_PASSWORD}@postgres:5432/openmaic
+      - PERSISTENCE_DEV_TOKEN=${PERSISTENCE_DEV_TOKEN}
+      - PERSISTENCE_ALLOW_INSECURE_DEV_AUTH=${PERSISTENCE_ALLOW_INSECURE_DEV_AUTH}
     networks:
       - default # outbound internet (LLM/media provider APIs, etc.)
       - render # reach the render service over the isolated network
@@ -39,13 +42,8 @@ services:
       - openmaic-data:/app/data
     restart: unless-stopped
     labels:
-      - 'traefik.docker.network=crnlwjndhfdarpr9rb1ahp3k'
-    environment:
-      - RENDER_SERVICE_URL=http://render-service:9000
-      - DATABASE_URL=postgresql://openmaic:${PERSISTENCE_POSTGRES_PASSWORD}@postgres:5432/openmaic
-      - PERSISTENCE_DEV_TOKEN=${PERSISTENCE_DEV_TOKEN}
-      - PERSISTENCE_ALLOW_INSECURE_DEV_AUTH=${PERSISTENCE_ALLOW_INSECURE_DEV_AUTH}
-   
+      - 'traefik.docker.network=crnlwjndhfdarpr9rb1ahp3k' 
+         
   # Optional PostgreSQL backing for the app-embedded persistence API.
   # The app reads DATABASE_URL and PERSISTENCE_DEV_TOKEN from .env.local; keeping
   # those values there avoids changing the default browser-only deployment.
