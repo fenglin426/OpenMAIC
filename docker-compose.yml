@@ -40,7 +40,11 @@ services:
     restart: unless-stopped
     labels:
       - 'traefik.docker.network=crnlwjndhfdarpr9rb1ahp3k'
-
+    environment:
+      - RENDER_SERVICE_URL=http://render-service:9000
+      - DATABASE_URL=postgresql://openmaic:${PERSISTENCE_POSTGRES_PASSWORD}@postgres:5432/openmaic
+      - PERSISTENCE_DEV_TOKEN=${PERSISTENCE_DEV_TOKEN}
+      - PERSISTENCE_ALLOW_INSECURE_DEV_AUTH=${PERSISTENCE_ALLOW_INSECURE_DEV_AUTH}
    
   # Optional PostgreSQL backing for the app-embedded persistence API.
   # The app reads DATABASE_URL and PERSISTENCE_DEV_TOKEN from .env.local; keeping
