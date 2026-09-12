@@ -37,7 +37,10 @@ services:
       # Optional: mount server-providers.yml for provider config
       # - ./server-providers.yml:/app/server-providers.yml:ro
       - openmaic-data:/app/data
-    restart: unless-stopped    
+    restart: unless-stopped
+    labels:
+      - 'traefik.docker.network=crnlwjndhfdarpr9rb1ahp3k'
+
    
   # Optional PostgreSQL backing for the app-embedded persistence API.
   # The app reads DATABASE_URL and PERSISTENCE_DEV_TOKEN from .env.local; keeping
